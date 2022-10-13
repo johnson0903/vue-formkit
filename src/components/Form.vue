@@ -15,21 +15,6 @@ const schema = [
     validation: 'required|email'
   },
   {
-    $formkit: 'password',
-    name: 'password',
-    label: 'Password',
-    help: 'Enter your new password.',
-    validation: 'required|length:5,16'
-  },
-  {
-    $formkit: 'password',
-    name: 'password_confirm',
-    label: 'Confirm password',
-    help: 'Enter your new password again to confirm it.',
-    validation: 'required|confirm',
-    validationLabel: 'password confirmation',
-  },
-  {
     $formkit: 'checkbox',
     name: 'eu_citizen',
     id: 'eu',
@@ -56,13 +41,18 @@ const schema = [
   {
     $formkit: 'customMultiSelect',
     name: 'customMultiSelect',
-    options: ['schema', 'custom', 'multi select'],
+    options: ['schema', 'custom', 'multi select', 'is', 'really', 'fun', 'and', 'usefull'],
     multiple: true,
     placeholder: 'Select one option',
     validation: 'required',
     'validation-messages': {
       required: '此欄位必填',
     }
+  },
+  {
+    $formkit: 'floatingLabelTextInput',
+    label: "漂浮文字框",
+    name: 'floatinglabel'
   }
 ];
 
@@ -78,10 +68,10 @@ const handleSubmit = () => alert("Valid submit!");
       <FormKitSchema :schema="schema" />
     </FormKit>
     <hr>
-    <h3>資料結果</h3>
-    <pre>{{ data }}</pre>
-  </div>
 
+  </div>
+  <h3>資料結果</h3>
+  <pre>{{ data }}</pre>
 </template>
 <style>
 .form {
@@ -91,5 +81,29 @@ const handleSubmit = () => alert("Valid submit!");
 
 .form pre {
   text-align: left;
+}
+
+.formkit-inner {
+  position: relative;
+}
+
+.formkit-label-floating {
+  position: absolute;
+  left: .5em;
+  color: grey;
+  transition: all .25s;
+  bottom: calc(100% - .5em);
+  transform: translateY(100%);
+  padding: .25em;
+  box-sizing: border-box;
+}
+
+input:focus~.formkit-label-floating,
+textarea:focus~.formkit-label-floating,
+.formkit-label-floating[data-has-value="true"] {
+  font-size: .7em;
+  transform: translateY(50%);
+  background-color: white;
+  bottom: 100%;
 }
 </style>

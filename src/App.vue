@@ -7,3 +7,8 @@
    <Form></Form>
   </div>
 </template>
+<style>
+  #app {
+    margin-top: 100px;
+  }
+</style>
