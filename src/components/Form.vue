@@ -2,6 +2,21 @@
 import { FormKitSchema, createInput } from "@formkit/vue";
 import { ref } from "vue";
 
+const customOptions = [
+  {
+    value: 'item-2',
+    label: 'Bhajji',
+  },
+  {
+    value: 'item-55',
+    label: 'Vada Pav (out of stock)',
+  },
+  {
+    value: 'item-22',
+    label: 'Paratha',
+  },
+]
+
 const schema = [
   {
     $el: 'h1',
@@ -33,12 +48,6 @@ const schema = [
     help: 'How often should we display a cookie notice?'
   },
   {
-    $formkit: 'checkbox',
-    name: 'toppings',
-    label: 'Toppings',
-    options: ['Mushrooms', 'Olives', 'Salami', 'Anchovies']
-  },
-  {
     $formkit: 'customMultiSelect',
     name: 'customMultiSelect',
     options: ['schema', 'custom', 'multi select', 'is', 'really', 'fun', 'and', 'usefull'],
@@ -53,12 +62,24 @@ const schema = [
     $formkit: 'floatingLabelTextInput',
     label: "漂浮文字框",
     name: 'floatinglabel'
+  },
+  {
+    $formkit: 'customCheckbox',
+    name: 'customCheckbox',
+    label: 'Custom checkbox',
+    options: customOptions,
+    validation: 'required|optionAllowOther',
+    'validation-messages': {
+      optionAllowOther: 'Please provide a value for “other”.'
+    },
+    'allow-other': true
   }
 ];
 
 const data = ref({});
 
 const handleSubmit = () => alert("Valid submit!");
+
 
 </script>
 
@@ -72,6 +93,7 @@ const handleSubmit = () => alert("Valid submit!");
   </div>
   <h3>資料結果</h3>
   <pre>{{ data }}</pre>
+
 </template>
 <style>
 .form {
