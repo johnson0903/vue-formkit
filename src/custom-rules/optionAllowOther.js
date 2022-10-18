@@ -7,7 +7,7 @@ export default function optionAllowOther(node){
   if (otherValueIndex !== -1) {
     // In this case the "other" option is checked, so make sure it isnt
     // an empty string
-    return node.value[otherValueIndex] !== ''
+    return node.value[otherValueIndex].trim() !== ''
   }
   
   return true

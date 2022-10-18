@@ -1,0 +1,183 @@
+{
+  "formTitle": "Contact our sales team",
+  "formSubtitle": "<div>Please contact us if you would like to know more about our products. For services and support, please visit <a class=\"eSupportLink\" href=\"https://esupport.gigabyte.com\" target=\"_blank\">eSupport</a>.</div>",
+  "formSections": [
+    {
+      "title": "Inquiries*",
+      "childNodes": [
+        {
+          "nodeType": "input",
+          "inputType": "customCheckbox",
+          "name": "Inquiries",
+          "options": [
+            {
+              "value": "1",
+              "label": "Request for Quotation"
+            },
+            {
+              "value": "2",
+              "label": "Form a Partnership"
+            },
+            {
+              "value": "3",
+              "label": "Talk to Sales"
+            },
+            {
+              "value": "4",
+              "label": "Educational Resource"
+            },
+            {
+              "value": "5",
+              "label": "Need More Information"
+            },
+            {
+              "value": "6",
+              "label": "After-sales Service"
+            }
+          ],
+          "validation": "required|optionAllowOther",
+          "validation-messages": {
+            "optionAllowOther": "Please provide a value for “other”."
+          },
+          "allowOther": true
+        }
+      ]
+    },
+    {
+      "title": "Profile",
+      "childNodes": [
+        {
+          "nodeType": "group",
+          "children": [
+            {
+              "nodeType": "input",
+              "inputType": "text",
+              "name": "Firstname",
+              "placeholder": "Firstname",
+              "validation": "required:trim"
+            },
+            {
+              "nodeType": "input",
+              "inputType": "text",
+              "name": "Lastname",
+              "placeholder": "Lastname",
+              "validation": "required:trim"
+            }
+          ]
+        },
+        {
+          "nodeType": "input",
+          "inputType": "email",
+          "name": "email",
+          "placeholder": "Work Email",
+          "validation": "required:trim|email",
+          "help": "To ensure our emails be delivered to your inbox, please avoid using free-to-use email services such as Yahoo, Gmail, Hotmail etc."
+        }
+      ]
+    },
+    {
+      "title": "Company",
+      "childNodes": [
+        {
+          "nodeType": "group",
+          "children": [
+            {
+              "nodeType": "input",
+              "inputType": "text",
+              "name": "Company",
+              "placeholder": "Company",
+              "validation": "required:trim"
+            },
+            {
+              "nodeType": "input",
+              "inputType": "text",
+              "name": "URL",
+              "placeholder": "URL",
+              "validation": "required:trim"
+            }
+          ]
+        },
+        {
+          "nodeType": "input",
+          "inputType": "customMultiSelect",
+          "name": "officeLocation",
+          "placeholder": "Office Location",
+          "validation": "required",
+          "options": [
+            "schema",
+            "custom",
+            "multi select",
+            "is",
+            "really",
+            "fun",
+            "and",
+            "usefull"
+          ],
+          "test": "1234",
+          "multiple": true,
+          "validation-messages": {
+            "required": "此欄位必填"
+          }
+        }
+      ]
+    },
+    {
+      "title": "About Your Inquiry",
+      "childNodes": [
+        {
+          "nodeType": "group",
+          "children": [
+            {
+              "nodeType": "input",
+              "inputType": "customMultiSelect",
+              "name": "productInterest",
+              "placeholder": "Product you’re interested in*",
+              "validation": "required",
+              "options": [
+                "schema",
+                "custom",
+                "multi select",
+                "is",
+                "really",
+                "fun",
+                "and",
+                "usefull"
+              ],
+              "validation-messages": {
+                "required": "此欄位必填"
+              }
+            },
+            {
+              "nodeType": "input",
+              "inputType": "customMultiSelect",
+              "name": "productUsedIn",
+              "placeholder": "You are using the product for*",
+              "validation": "required",
+              "options": [
+                "schema",
+                "custom",
+                "multi select",
+                "is",
+                "really",
+                "fun",
+                "and",
+                "usefull"
+              ],
+              "validation-messages": {
+                "required": "此欄位必填"
+              }
+            }
+          ]
+        },
+        {
+          "nodeType": "input",
+          "inputType": "textarea",
+          "name": "textarea",
+          "placeholder": "Help us better understand your inquiry (limited to 1000 characters)*",
+          "maxlength": 10,
+          "validation": "required:trim"
+        }
+      ]
+    }
+  ]
+}

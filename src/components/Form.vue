@@ -1,7 +1,7 @@
 <script setup>
 import { FormKitSchema, createInput } from "@formkit/vue";
 import { ref } from "vue";
-
+import mockFormJson from '../assets/data.json';
 const customOptions = [
   {
     value: '1',
@@ -72,7 +72,6 @@ const schema = [
       }
     ]
   },
-
   {
     $el: 'div',
     attrs: {
@@ -104,29 +103,69 @@ const schema = [
             outerClass: 'col',
           },
         ]
-      }
-
+      },
+      {
+        $formkit: 'customMultiSelect',
+        name: 'customMultiSelect',
+        options: ['schema', 'custom', 'multi select', 'is', 'really', 'fun', 'and', 'usefull'],
+        multiple: true,
+        placeholder: 'Select one option',
+        validation: 'required',
+        'validation-messages': {
+          required: '此欄位必填',
+        }
+      },
+      {
+        $formkit: 'floatingLabelTextInput',
+        label: "漂浮文字框",
+        name: 'floatinglabel'
+      },
     ]
-  },
-  {
-    $formkit: 'customMultiSelect',
-    name: 'customMultiSelect',
-    options: ['schema', 'custom', 'multi select', 'is', 'really', 'fun', 'and', 'usefull'],
-    multiple: true,
-    placeholder: 'Select one option',
-    validation: 'required',
-    'validation-messages': {
-      required: '此欄位必填',
-    }
-  },
-  {
-    $formkit: 'floatingLabelTextInput',
-    label: "漂浮文字框",
-    name: 'floatinglabel'
   },
 ];
 
 const data = ref({});
+
+// 整理 json 資料
+let schemaData = mockFormJson.formSections
+let newData = schemaData.map((section) => {
+  let newSection = {}
+  newSection.$el = 'div'
+  newSection.attrs = {
+    class: 'gc-form-group'
+  }
+  let sectionChildren = [];
+  section.childNodes.forEach((node) => {
+    const formRowNode = {
+      $el: 'div',
+      attrs: {
+        class: 'gc-form-row'
+      },
+      children: []
+    }
+    if (node.nodeType === 'input') {
+      node.$formkit = node.inputType;
+      node.outerClass = 'col'
+      formRowNode.children.push(node)
+    } else if (node.nodeType === 'group') {
+      node.children.forEach((inputNode) => {
+        inputNode.$formkit = inputNode.inputType;
+        delete inputNode.nodeType
+        inputNode.outerClass = 'col'
+        formRowNode.children.push(inputNode)
+      });
+    }
+    delete node.nodeType;
+    sectionChildren.push(formRowNode)
+  })
+  sectionChildren.unshift({
+    $el: 'h2',
+    children: section.title
+  })
+  newSection.children = sectionChildren;
+  return newSection
+})
+console.log(newData)
 
 const handleSubmit = () => alert("Valid submit!");
 
@@ -136,7 +175,7 @@ const handleSubmit = () => alert("Valid submit!");
 <template>
   <div class="form">
     <FormKit type="form" v-model="data" @submit="handleSubmit">
-      <FormKitSchema :schema="schema" />
+      <FormKitSchema :schema="newData" />
     </FormKit>
     <hr>
 

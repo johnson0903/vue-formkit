@@ -1,10 +1,11 @@
 <template>
   <VueMultiselect v-model="value" :options="props.context.options" :multiple="!!props.context.multiple"
-    :close-on-select="false" :placeholder="props.context.placeholder || 'Select one option'">
+    :close-on-select="!props.context.multiple" 
+    :placeholder="props.context.placeholder || 'Select one option'">
   </VueMultiselect>
 </template>
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import VueMultiselect from 'vue-multiselect'
 
 const props = defineProps({
