@@ -4,16 +4,28 @@ import { ref } from "vue";
 
 const customOptions = [
   {
-    value: 'item-2',
-    label: 'Bhajji',
+    value: '1',
+    label: 'Request for Quotation',
   },
   {
-    value: 'item-55',
-    label: 'Vada Pav (out of stock)',
+    value: '2',
+    label: 'Form a Partnership',
   },
   {
-    value: 'item-22',
-    label: 'Paratha',
+    value: '3',
+    label: 'Talk to Sales',
+  },
+  {
+    value: '4',
+    label: 'Educational Resource',
+  },
+  {
+    value: '5',
+    label: 'Need More Information',
+  },
+  {
+    value: '6',
+    label: 'After-sales Service',
   },
 ]
 
@@ -23,29 +35,78 @@ const schema = [
     children: 'Register'
   },
   {
-    $formkit: 'text',
-    name: 'email',
-    label: 'Email',
-    help: '提醒您，為確保您能盡快收到 GIGABYTE 回覆信件，請避免使用免費信箱，如：Yahoo、Gmail、Hotmail等，以保障您的權益，謝謝。',
-    validation: 'required|email'
+    $el: 'p',
+    attrs: {
+      innerHTML: `<div>Please contact us if you would like to know more about our products. For services and support, please visit <a class="eSupportLink" href="https://esupport.gigabyte.com" target="_blank">eSupport</a>.</div>`
+    }
   },
   {
-    $formkit: 'checkbox',
-    name: 'eu_citizen',
-    id: 'eu',
-    label: 'Are you a european citizen?',
-  },
-  {
-    $formkit: 'select',
-    if: '$get(eu).value', // 👀 Oooo, conditionals!
-    name: 'cookie_notice',
-    label: 'Cookie notice frequency',
-    options: {
-      refresh: 'Every page load',
-      hourly: 'Ever hour',
-      daily: 'Every day'
+    $el: 'div',
+    attrs: {
+      class: 'gc-form-group'
     },
-    help: 'How often should we display a cookie notice?'
+    children: [
+      {
+        $el: 'h3',
+        children: 'Inquiries*'
+      },
+      {
+        $el: 'div',
+        attrs: {
+          class: 'gc-form-row'
+        },
+        children: [
+          {
+            $formkit: 'customCheckbox',
+            name: 'customCheckbox',
+            label: 'Custom checkbox',
+            options: customOptions,
+            validation: 'required|optionAllowOther',
+            'validation-messages': {
+              optionAllowOther: 'Please provide a value for “other”.'
+            },
+            'allow-other': true,
+            help: '請選擇'
+          },
+        ]
+      }
+    ]
+  },
+
+  {
+    $el: 'div',
+    attrs: {
+      class: 'gc-form-group'
+    },
+    children: [
+      {
+        $el: 'h3',
+        children: 'Profile'
+      },
+      {
+        $el: 'div',
+        attrs: {
+          class: 'gc-form-row'
+        },
+        children: [
+          {
+            $formkit: 'text',
+            name: 'Firstname',
+            label: 'Firstname',
+            validation: 'required:trim',
+            outerClass: 'col',
+          },
+          {
+            $formkit: 'text',
+            name: 'email',
+            label: 'Email',
+            validation: 'required:trim',
+            outerClass: 'col',
+          },
+        ]
+      }
+
+    ]
   },
   {
     $formkit: 'customMultiSelect',
@@ -63,17 +124,6 @@ const schema = [
     label: "漂浮文字框",
     name: 'floatinglabel'
   },
-  {
-    $formkit: 'customCheckbox',
-    name: 'customCheckbox',
-    label: 'Custom checkbox',
-    options: customOptions,
-    validation: 'required|optionAllowOther',
-    'validation-messages': {
-      optionAllowOther: 'Please provide a value for “other”.'
-    },
-    'allow-other': true
-  }
 ];
 
 const data = ref({});
@@ -98,11 +148,27 @@ const handleSubmit = () => alert("Valid submit!");
 <style>
 .form {
   text-align: left;
-  width: 500px;
+  max-width: 690px;
+  padding-inline: 15px;
 }
 
 .form pre {
   text-align: left;
+}
+
+[data-type="checkbox"] fieldset.formkit-fieldset {
+  border: none !important;
+  padding: 0;
+}
+
+[data-type="checkbox"] .formkit-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.formkit-wrapper,
+.formkit-fieldset {
+  max-width: initial !important;
 }
 
 .formkit-inner {

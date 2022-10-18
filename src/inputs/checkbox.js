@@ -84,7 +84,6 @@ export const customCheckbox = {
        * Multi checkbox structure.
        */
       fieldset(
-        help('$help'),
         boxOptions(
           boxOption(
             boxWrapper(
@@ -109,7 +108,7 @@ export const customCheckbox = {
       )
     ),
     // Help text only goes under the input when it is a single.
-    $if('$options == undefined && $help', help('$help')),
+   help('$help'),
     messages(message('$message.value'))
   ),
   /**

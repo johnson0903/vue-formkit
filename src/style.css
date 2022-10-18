@@ -6,3 +6,19 @@ body {
   min-height: 100vh;
   background-color:cornsilk;
 }
+
+.gc-form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gc-form-row .col {
+  flex: 1 0 0%;
+}
+
+@media screen and (max-width: 960px) {
+  .gc-form-row .col {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
