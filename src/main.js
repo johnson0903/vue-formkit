@@ -4,7 +4,7 @@ import App from './App.vue'
 import { plugin, defaultConfig, createInput } from '@formkit/vue'
 import CustomMultiSelect from './components/CustomMultiSelect.vue';
 import { floatingLabelTextInput } from './inputs/floatingLabelTextInput';
-import { customCheckbox  } from './inputs/checkbox';
+import { customCheckbox } from './inputs/checkbox';
 import optionAllowOther from './custom-rules/optionAllowOther'
 
 createApp(App).use(plugin,
@@ -12,12 +12,12 @@ createApp(App).use(plugin,
     theme: 'genesis',
     inputs: {
       'customMultiSelect': createInput(CustomMultiSelect, {
-        props: ['options', 'multiple', 'placeholder'],
+        props: ['options', 'vueMultiSelectOptions'],
       }),
       floatingLabelTextInput,
       customCheckbox
     },
     rules: {
-      optionAllowOther 
+      optionAllowOther
     }
   })).mount('#app')

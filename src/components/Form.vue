@@ -129,9 +129,9 @@ const data = ref({});
 // 整理 json 資料
 let schemaData = mockFormJson.formSections
 let newData = schemaData.map((section) => {
-  let newSection = {}
-  newSection.$el = 'div'
-  newSection.attrs = {
+  let gcFormGroup = {}
+  gcFormGroup.$el = 'div'
+  gcFormGroup.attrs = {
     class: 'gc-form-group'
   }
   let sectionChildren = [];
@@ -162,8 +162,8 @@ let newData = schemaData.map((section) => {
     $el: 'h2',
     children: section.title
   })
-  newSection.children = sectionChildren;
-  return newSection
+  gcFormGroup.children = sectionChildren;
+  return gcFormGroup
 })
 console.log(newData)
 

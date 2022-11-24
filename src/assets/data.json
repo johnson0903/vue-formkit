@@ -40,6 +40,13 @@
             "optionAllowOther": "Please provide a value for “other”."
           },
           "allowOther": true
+        },
+        {
+          "nodeType": "input",
+          "inputType": "customCheckbox",
+          "name": "SingleCheckbox",
+          "validation": "required",
+          "label": "Single Checkbox"
         }
       ]
     },
@@ -85,10 +92,12 @@
               "nodeType": "input",
               "inputType": "text",
               "name": "Company",
+              "id": "Company_123",
               "placeholder": "Company",
               "validation": "required:trim"
             },
             {
+              "if": "$get(Company_123).value",
               "nodeType": "input",
               "inputType": "text",
               "name": "URL",
@@ -101,22 +110,20 @@
           "nodeType": "input",
           "inputType": "customMultiSelect",
           "name": "officeLocation",
-          "placeholder": "Office Location",
           "validation": "required",
           "options": [
-            "schema",
-            "custom",
-            "multi select",
-            "is",
-            "really",
-            "fun",
-            "and",
-            "usefull"
+            "office 1",
+            "office 2",
+            "office 3",
+            "office 4",
+            "office 5"
           ],
-          "test": "1234",
-          "multiple": true,
           "validation-messages": {
             "required": "此欄位必填"
+          },
+          "vueMultiSelectOptions": {
+            "placeholder": "Office Location",
+            "multiple": true
           }
         }
       ]
@@ -131,7 +138,7 @@
               "nodeType": "input",
               "inputType": "customMultiSelect",
               "name": "productInterest",
-              "placeholder": "Product you’re interested in*",
+              "id": "productInterest",
               "validation": "required",
               "options": [
                 "schema",
@@ -145,24 +152,57 @@
               ],
               "validation-messages": {
                 "required": "此欄位必填"
+              },
+              "vueMultiSelectOptions": {
+                "placeholder": "Product you’re interested in*"
               }
             },
             {
+              "if": "$get(productInterest).value === 'schema' || $get(productInterest).value === 'custom'",
               "nodeType": "input",
               "inputType": "customMultiSelect",
               "name": "productUsedIn",
-              "placeholder": "You are using the product for*",
               "validation": "required",
-              "options": [
-                "schema",
-                "custom",
-                "multi select",
-                "is",
-                "really",
-                "fun",
-                "and",
-                "usefull"
-              ],
+             
+              "options": {
+                "if": "$get(productInterest).value === schema",
+                "then": [
+                  {
+                    "id": "1",
+                    "displayLabel": "schema 1"
+                  },
+                  {
+                    "id": "2",
+                    "displayLabel": "schema 2"
+                  },
+                  {
+                    "id": "3",
+                    "displayLabel": "schema 3"
+                  }
+                ],
+                "else": {
+                  "if": "$get(productInterest).value === custom",
+                  "then": [
+                    {
+                      "id": "1",
+                      "displayLabel": "custom 1"
+                    },
+                    {
+                      "id": "2",
+                      "displayLabel": "custom 2"
+                    },
+                    {
+                      "id": "3",
+                      "displayLabel": "custom 3"
+                    }
+                  ]
+                }
+              },
+              "vueMultiSelectOptions": {
+                "placeholder": "You are using the product for*",
+                "track-by":"id",
+                "label": "displayLabel"
+              },
               "validation-messages": {
                 "required": "此欄位必填"
               }
